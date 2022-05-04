@@ -70,11 +70,16 @@ function rotateCylinder()
   c1.matrixAutoUpdate = false;
   s2.matrixAutoUpdate = false;
   c2.matrixAutoUpdate = false;
+  s3.matrixAutoUpdate = false;
+  c3.matrixAutoUpdate = false;
 
   // resetting matrices
   c1.matrix.identity();
   s2.matrix.identity();
   c2.matrix.identity();
+  s3.matrix.identity();
+  c3.matrix.identity();
+
 
   // Auxiliar matrix
   var mat4 = new THREE.Matrix4();
@@ -94,7 +99,7 @@ function rotateCylinder()
   s3.matrix.multiply(mat4.makeTranslation(0.0, 1.0, 0.0));
 
   // Will execute T2 and then R2 
-  c3.matrix.multiply(mat4.makeRotationZ(angle[1])); // R2
+  c3.matrix.multiply(mat4.makeRotationZ(angle[2])); // R2
   c3.matrix.multiply(mat4.makeTranslation(0.0, 1.0, 0.0)); // T2
 }
 
