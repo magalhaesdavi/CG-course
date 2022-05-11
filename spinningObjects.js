@@ -18,6 +18,7 @@ initDefaultBasicLight(scene);
 // Set angles of rotation
 var angle = 0;
 var angle2 = 0;
+var angle3 = 0;
 var speed = 0.05;
 var animationOn = true; // control if animation is on or of
 
@@ -48,15 +49,15 @@ cylinder.add(cylinder2);
 var cylinderGeometry3 = new THREE.CylinderGeometry(0.07, 0.07, 1.0, 25);
 var cylinderMaterial3 = new THREE.MeshPhongMaterial( {color:'rgb(255,255,0)'} );
 var cylinder3 = new THREE.Mesh( cylinderGeometry3, cylinderMaterial3 );
-cylinder3.translateY(0.5)
-cylinder3.rotateX(degreesToRadians(90))
+//cylinder3.translateY(0.5)
+//cylinder3.rotateX(degreesToRadians(90))
 cylinder2.add(cylinder3);
 
 var cylinderGeometry4 = new THREE.CylinderGeometry(0.07, 0.07, 1.0, 25);
 var cylinderMaterial4 = new THREE.MeshPhongMaterial( {color:'rgb(255,255,0)'} );
 var cylinder4 = new THREE.Mesh( cylinderGeometry4, cylinderMaterial4 );
-cylinder4.translateY(-0.5)
-cylinder4.rotateX(degreesToRadians(90))
+//cylinder4.translateY(-0.5)
+//cylinder4.rotateX(degreesToRadians(90))
 cylinder2.add(cylinder4);
 
 // Listen window size changes
@@ -79,6 +80,7 @@ function rotateCylinder()
   {
     angle+=speed;
     angle2+=speed*2;
+    angle3+=speed*2;
     
     var mat4 = new THREE.Matrix4();
     cylinder.matrix.identity();  // reset matrix
@@ -95,11 +97,13 @@ function rotateCylinder()
     cylinder2.matrix.multiply(mat4.makeTranslation(0.0, 1.0, 0.0)); // T1
     cylinder2.matrix.multiply(mat4.makeRotationX(degreesToRadians(90))); // R2
 
-    cylinder3.matrix.multiply(mat4.makeRotationX(angle2)); // R1
-    cylinder3.matrix.multiply(mat4.makeTranslation(0.0, 0.0, 1.0)); // T1
+    cylinder3.matrix.multiply(mat4.makeRotationY(angle3)); // R1
+    cylinder3.matrix.multiply(mat4.makeTranslation(0.0, 0.5, 0.0)); // T1
+    cylinder3.matrix.multiply(mat4.makeRotationX(degreesToRadians(90)));
 
-    cylinder4.matrix.multiply(mat4.makeRotationX(-angle2)); // R1
-    cylinder4.matrix.multiply(mat4.makeTranslation(0.0, 0.0, 1.0)); // T1
+    cylinder4.matrix.multiply(mat4.makeRotationY(-angle3)); // R1
+    cylinder4.matrix.multiply(mat4.makeTranslation(0.0, -0.5, 0.0)); // T1
+    cylinder4.matrix.multiply(mat4.makeRotationX(degreesToRadians(90)));
   }
 }
 
